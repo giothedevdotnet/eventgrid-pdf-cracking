@@ -6,7 +6,7 @@ var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()
     .ConfigureServices(services =>
     {
-        services.AddSingleton<IPdfSplitter, PdfSplitterByPage>();
+        services.AddSingleton<IPDFCreaking, IPDFCreakingByPage>();
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
     })

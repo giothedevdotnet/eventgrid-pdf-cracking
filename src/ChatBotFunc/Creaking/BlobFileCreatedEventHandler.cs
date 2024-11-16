@@ -16,11 +16,11 @@ namespace ChatBotFunc.ChunkFile
     {
         private readonly ILogger<BlobFileCreatedEventHandler> _logger;
         private readonly IConfiguration _configuration;
-        private readonly IPdfSplitter _pdfSplitter;
+        private readonly IPDFCreaking _pdfSplitter;
         private const string _upstreamContainerName = "books";
         private const string _downstreamContainerName = "chunk-books";
 
-        public BlobFileCreatedEventHandler(ILogger<BlobFileCreatedEventHandler> logger, IConfiguration configuration, IPdfSplitter pdfSplitter)
+        public BlobFileCreatedEventHandler(ILogger<BlobFileCreatedEventHandler> logger, IConfiguration configuration, IPDFCreaking pdfSplitter)
         {
             _logger = logger;
             _configuration = configuration;
@@ -34,12 +34,11 @@ namespace ChatBotFunc.ChunkFile
             await InternalBlobFileCreatedEventHandler(cloudEvent);
         }
 
-        [Function(nameof(HandleBlobCreatedEventHttpTrigger))]
-        public async Task<IActionResult> HandleBlobCreatedEventHttpTrigger([HttpTrigger(AuthorizationLevel.Function, "POST")] HttpRequest httpRequest)
+        [Function(nameof(HandleBlobCreatedHttpTrigger))]
+        public async Task<IActionResult> HandleBlobCreatedHttpTrigger([HttpTrigger(AuthorizationLevel.Function, "POST")] HttpRequest httpRequest)
         {
-            // https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventgrid/Azure.Messaging.EventGrid/samples/Sample3_ParseAndDeserializeEvents.md#parse-events-from-json-payload
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-
+            // https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/eventgrid/Azure.Messaging.EventGrid/samples/Sample3_ParseAndDeserializeEvents.md#parse-events-from-json-payload            
+            _logger.LogInformation("C# HTTP trigger function processing a request.");
             // Parse the JSON payload into a list of events
             CloudEvent[] cloudEvents = CloudEvent.ParseMany(await BinaryData.FromStreamAsync(httpRequest.Body));
 
@@ -94,6 +93,8 @@ namespace ChatBotFunc.ChunkFile
 
             // Delete the original file from the upstream container
             File.Delete(destinationPath);
+
+            _logger.LogInformation("Creaking completed.");
         }
 
         private async Task UploadDirectoryToAzureStorage(string? downstreamBlobConnectionString, string sourceDirectory, string destinationContainerName, string destinationFolderName, string documentName)

@@ -1,7 +1,7 @@
 using ChatBotFunc.ChunkFile;
 using iText.Kernel.Pdf;
 
-public class PdfSplitterByPage : IPdfSplitter
+public class IPDFCreakingByPage : IPDFCreaking
 {
     public void SplitPdf(string inputFilePath, string outputPath)
     {
