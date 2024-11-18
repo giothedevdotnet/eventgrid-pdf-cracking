@@ -1,0 +1,44 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: blobfilecreated-binding
+spec:
+  type: bindings.rabbitmq
+  version: v1
+  metadata:
+  - name: contentType
+    value: "application/cloudevent+json"  
+  - name: queueName
+    value: "BlobFileCreated"
+  - name: host
+    value: "amqp://rabbitmq:5672"
+  - name: direction 
+    value: "input"
+  - name: durable
+    value: "true"
+  - name: username
+    value: guest
+  - name: password
+    value: guest
+  - name: route
+    value: /api/Creaking
+  # - name: deleteWhenUnused
+  #   value: "false"
+  # - name: ttlInSeconds
+  #   value: "60"
+  # - name: prefetchCount
+  #   value: "0"
+  # - name: exclusive
+  #   value: "false"
+  # - name: maxPriority
+  #   value: "5"
+  # - name: reconnectWaitInSeconds
+  #   value: "5"
+  # - name: externalSasl
+  #   value: "false"
+  # - name: caCert
+  #   value: "null"
+  # - name: clientCert
+  #   value: "null"
+  # - name: clientKey
+  #   value: "null"

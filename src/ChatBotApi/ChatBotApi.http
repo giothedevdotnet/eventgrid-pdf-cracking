@@ -1,0 +1,27 @@
+@ChatBotApi_HostAddress = http://localhost:62736
+
+POST {{ChatBotApi_HostAddress}}/api/creaking
+Content-Type: application/json
+{
+  "id": "1135e109-801e-003e-45dc-30d82006730c",
+  "source": "/subscriptions/c1bda0fc-c0e3-4b89-be00-0524b96b7b0f/resourceGroups/rg-gioai-lab-ae-01/providers/Microsoft.Storage/storageAccounts/devstoreaccount1",
+  "specversion": "1.0",
+  "type": "Microsoft.Storage.BlobCreated",
+  "subject": "/blobServices/default/containers/data/blobs/example.pdf",
+  "time": "2024-11-07T06:17:03.7185226Z",
+  "data": {
+    "Api": "PutBlob",
+    "ClientRequestId": "033f9266-8b5d-4962-a551-49b67203200f",
+    "RequestId": "1135e109-801e-003e-45dc-30d820000000",
+    "ETag": "0x8DCFEF3CC4255E5",
+    "ContentType": "application/pdf",
+    "ContentLength": 804915,
+    "BlobType": "BlockBlob",
+    "AccessTier": "Default",
+    "Url": "http://localhost:10000/devstoreaccount1/data/example.pdf",
+    "Sequencer": "0000000000000000000000000001137000000000027253f3",
+    "StorageDiagnostics": {
+      "BatchId": "0e71cc9e-7006-0058-00dc-309700000000"
+    }
+  }
+}
